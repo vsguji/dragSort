@@ -1,0 +1,6 @@
+framework module dragSort {
+  umbrella header "dragSort-umbrella.h"
+
+  export *
+  module * { export * }
+}
