@@ -1,24 +1,30 @@
 {
   "name": "dragSort",
   "version": "0.1.0",
-  "summary": "A short description of dragSort.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/1720177/dragSort",
+  "summary": "推动排序",
+  "description": "UICollectionView 拖动排序",
+  "homepage": "https://github.com/vsguji/dragSort.git",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "1720177": "1162423147@qq.com"
+    "lipeng": "1162423147@qq.com"
   },
   "source": {
-    "git": "https://github.com/1720177/dragSort.git",
+    "git": "https://github.com/vsguji/dragSort.git",
     "tag": "0.1.0"
   },
+  "social_media_url": "https://www.jianshu.com/u/40ea8f672608",
   "platforms": {
     "ios": "10.0"
   },
-  "source_files": "dragSort/Classes/*.swift",
+  "source_files": "dragSort/Classes/*",
+  "resource_bundles": {
+    "dragSort": [
+      "dragSort/Assets/*.png"
+    ]
+  },
   "frameworks": [
     "UIKit",
     "Foundation"

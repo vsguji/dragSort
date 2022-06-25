@@ -85,7 +85,7 @@ class CustomCollectionView : UICollectionView {
             dragInteractionEnabled = true
         }
         register(cellType: EditCollectionViewCell.self)
-        register(HeaderCollectionReusableView.self, forSupplementaryViewOfKind:UICollectionElementKindSectionHeader,
+        register(HeaderCollectionReusableView.self, forSupplementaryViewOfKind:UICollectionView.elementKindSectionHeader,
                  withReuseIdentifier: HeaderCollectionReusableView.reuseIdentifier)
     }
     
@@ -384,9 +384,9 @@ extension CustomCollectionView: UICollectionViewDelegate,UICollectionViewDataSou
         let item = items[indexPath.section][indexPath.item]
         if (item is String) {
             guard let dic = (item as! String).data(using: .utf8),
-           let json = try? JSONSerialization.jsonObject(with: dic, options: []) as? [String:Any]
+           let json = try? JSONSerialization.jsonObject(with: dic, options: []) as! [String:Any]
            else { fatalError("Error") }
-            let name = json?["name"] as! String
+            let name = json["name"] as! String
             cell.dataSource(icon: correct(key: name), text: name,isAdd: indexPath.section == 1)
             cell.delegate = self
         }
@@ -400,7 +400,7 @@ extension CustomCollectionView: UICollectionViewDelegate,UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, for: indexPath, viewType: HeaderCollectionReusableView.self)
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, for: indexPath, viewType: HeaderCollectionReusableView.self)
         switch indexPath.section {
         case 0:
             cell.dataSource(text: "显示在首页", ishidden: false,color: UIColor(red: 54, green: 134, blue: 255, alpha: 1))
