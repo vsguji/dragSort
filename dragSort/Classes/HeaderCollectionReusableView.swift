@@ -10,7 +10,7 @@ import UIKit
 import Reusable
 import SnapKit
 
-class HeaderCollectionReusableView: UICollectionReusableView,Reusable {
+open class HeaderCollectionReusableView: UICollectionReusableView,Reusable {
     
     var lineColor:UIColor!
     
@@ -19,7 +19,7 @@ class HeaderCollectionReusableView: UICollectionReusableView,Reusable {
         setup()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -50,7 +50,7 @@ class HeaderCollectionReusableView: UICollectionReusableView,Reusable {
         lineColor = color
     }
     
-    override func layoutSubviews() {
+    open override func layoutSubviews() {
         let frame = lineView.frame
          if frame.equalTo(CGRect.zero) == false {
              let bgLayer = CALayer()

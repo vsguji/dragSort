@@ -9,11 +9,11 @@
 import UIKit
 import Reusable
 
-protocol EditCollectionViewCellDelegate {
+public protocol EditCollectionViewCellDelegate {
     func selectedCurrentCell(cell:EditCollectionViewCell,isAdd:Bool)
 }
 
-class EditCollectionViewCell: UICollectionViewCell,Reusable {
+open class EditCollectionViewCell: UICollectionViewCell,Reusable {
   
      var delegate:EditCollectionViewCellDelegate!
     
@@ -24,7 +24,7 @@ class EditCollectionViewCell: UICollectionViewCell,Reusable {
         setup()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -53,7 +53,7 @@ class EditCollectionViewCell: UICollectionViewCell,Reusable {
         }
     }
     
-    func dataSource(icon:String,text:String,isAdd:Bool = true) {
+   open  func dataSource(icon:String,text:String,isAdd:Bool = true) {
         isAddAction = isAdd
         image.image = UIImage.init(named: icon)
         label.text = text

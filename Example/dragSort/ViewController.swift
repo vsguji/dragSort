@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     
     lazy var  collection:CustomCollectionView = {
         let view = CustomCollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
-        view.register(cellType: BOEHomeTipCell.self)
+       // view.register(cellType: BOEHomeTipCell.self)
         view.cDelegate = self
         view.cDataSource = self
         view.backgroundColor = .clear

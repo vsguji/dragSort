@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Reusable
 
-@objc protocol CustomViewDelegate {
+@objc public protocol CustomViewDelegate {
 // 当数据源更新到目标位置调用,需要将新的数据源设置为当前的数据源
 func dragCollectionCell(_ collection:UICollectionView,newArrayAfterMove:[AnyHashable]?)
 
@@ -27,15 +27,15 @@ func dragCollectionCell(_ collection:UICollectionView,newArrayAfterMove:[AnyHash
  @objc optional func collectionViewEnd(_ collectionView:UICollectionView,gestureRecognier:UILongPressGestureRecognizer,indexPath:IndexPath)
 }
 
-@objc protocol CustomViewDataSource {
+@objc public protocol CustomViewDataSource {
     // 返回整个CollectionView数据,需根据数据重排
     func dataSourceOfCollectionView(_ collection:CustomCollectionView,indexPath:IndexPath) -> [AnyHashable]
 }
 
-class CustomCollectionView : UICollectionView {
+open class CustomCollectionView : UICollectionView {
   
-    weak var cDelegate:CustomViewDelegate?
-    weak var cDataSource:CustomViewDataSource?
+ open weak var cDelegate:CustomViewDelegate?
+ open weak var cDataSource:CustomViewDataSource?
     
     fileprivate var _editEnabled = false
     fileprivate var _isDeleteItem = false
@@ -59,7 +59,7 @@ class CustomCollectionView : UICollectionView {
     }
     
     var itemHeaders = [String]()
-    var items: [[AnyHashable]]!
+  open var items: [[AnyHashable]]!
     var dragingIndexPath: IndexPath?
     
     public override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -67,7 +67,7 @@ class CustomCollectionView : UICollectionView {
         setup()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -354,7 +354,7 @@ class CustomCollectionView : UICollectionView {
 
 extension CustomCollectionView {
     
-    override func scrollToItem(at indexPath: IndexPath, at scrollPosition: UICollectionView.ScrollPosition, animated: Bool) {
+    open override func scrollToItem(at indexPath: IndexPath, at scrollPosition: UICollectionView.ScrollPosition, animated: Bool) {
           super.scrollToItem(at: indexPath, at: scrollPosition, animated: animated)
         
         if #available(iOS 13.0, *) {
@@ -370,16 +370,16 @@ extension CustomCollectionView {
 
 extension CustomCollectionView: UICollectionViewDelegate,UICollectionViewDataSource,EditCollectionViewCellDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items[section].count
     }
     
     // 向数据源对象询问集合视图中的部分数量。
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    private func numberOfSections(in collectionView: UICollectionView) -> Int {
         return itemHeaders.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: EditCollectionViewCell.self)
         let item = items[indexPath.section][indexPath.item]
         if (item is String) {
@@ -399,8 +399,8 @@ extension CustomCollectionView: UICollectionViewDelegate,UICollectionViewDataSou
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, for: indexPath, viewType: HeaderCollectionReusableView.self)
+    private func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind:UICollectionView.elementKindSectionHeader, for: indexPath, viewType: HeaderCollectionReusableView.self)
         switch indexPath.section {
         case 0:
             cell.dataSource(text: "显示在首页", ishidden: false,color: UIColor(red: 54, green: 134, blue: 255, alpha: 1))
@@ -412,7 +412,7 @@ extension CustomCollectionView: UICollectionViewDelegate,UICollectionViewDataSou
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    private func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let clickString = self.items[indexPath.section][indexPath.row]
         if indexPath.section == 0 {
@@ -437,7 +437,7 @@ extension CustomCollectionView: UICollectionViewDelegate,UICollectionViewDataSou
         }
     }
     
-    func selectedCurrentCell(cell: EditCollectionViewCell,isAdd:Bool) {
+    public func selectedCurrentCell(cell: EditCollectionViewCell,isAdd:Bool) {
         guard let indexPath = indexPath(for: cell) else {return}
         let clickString = self.items[indexPath.section][indexPath.row]
         if (isAdd) {
@@ -493,7 +493,7 @@ extension CustomCollectionView: UICollectionViewDelegateFlowLayout {
 @available(iOS 11.0,*)
 extension CustomCollectionView: UICollectionViewDropDelegate {
    //  处理拖动放下后如何处理
-    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+    public func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         guard let destinationIndexPath = coordinator.destinationIndexPath else {
             return
         }
@@ -532,7 +532,7 @@ extension CustomCollectionView: UICollectionViewDropDelegate {
         }
     }
     // 处理拖动过程中
-    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+    private func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
         guard dragingIndexPath?.section == destinationIndexPath?.section else {
             return UICollectionViewDropProposal(operation: .forbidden)
         }
@@ -551,7 +551,7 @@ extension CustomCollectionView: UICollectionViewDropDelegate {
 @available(iOS 11.0,*)
 extension CustomCollectionView : UICollectionViewDragDelegate {
     // 处理首次拖动时，是否响应
-    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+    public func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         guard indexPath.section != 1 else {
             return []
         }

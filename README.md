@@ -27,3 +27,22 @@ pod 'dragSort'
 ## License
 
 dragSort is available under the MIT license. See the LICENSE file for more info.
+
+
+项目中导入私有库之后，报错如下：
+Cannot find 'XXX' in scope
+解决：
+Swift的私有库文件，类、属性和方法前面用open修饰，init方法前面用public修饰，然后重新上传私有库，打新tag标签，BaseLibiOS.podspec文件的tag也要修改，请参考目录2-6和3、4、5、6，并把tag推送到远端
+
+
+https://blog.csdn.net/Riven_wn/article/details/78751528
+
+
+open：可以在任何地方被访问、继承、重写。
+public：可以在任何地方被访问，在其他模块中不能被继承和重写。
+internal：在整个模块内都可以被访问。
+fileprivate：其修饰的属性可以再同一个文件被访问、继承和重写，同一个文件指同一个swift文件，一个文件中可以有多个类。
+private：其修饰的属性和方法只能在本类被访问和使用。
+————————————————
+版权声明：本文为CSDN博主「布怀特」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/Riven_wn/article/details/78751528
