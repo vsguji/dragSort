@@ -375,7 +375,7 @@ extension CustomCollectionView: UICollectionViewDelegate,UICollectionViewDataSou
     }
     
     // 向数据源对象询问集合视图中的部分数量。
-    private func numberOfSections(in collectionView: UICollectionView) -> Int {
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
         return itemHeaders.count
     }
     
@@ -399,7 +399,7 @@ extension CustomCollectionView: UICollectionViewDelegate,UICollectionViewDataSou
         return cell
     }
     
-    private func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind:UICollectionView.elementKindSectionHeader, for: indexPath, viewType: HeaderCollectionReusableView.self)
         switch indexPath.section {
         case 0:
@@ -412,7 +412,7 @@ extension CustomCollectionView: UICollectionViewDelegate,UICollectionViewDataSou
         return cell
     }
     
-    private func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let clickString = self.items[indexPath.section][indexPath.row]
         if indexPath.section == 0 {
@@ -532,7 +532,7 @@ extension CustomCollectionView: UICollectionViewDropDelegate {
         }
     }
     // 处理拖动过程中
-    private func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+    public func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
         guard dragingIndexPath?.section == destinationIndexPath?.section else {
             return UICollectionViewDropProposal(operation: .forbidden)
         }
