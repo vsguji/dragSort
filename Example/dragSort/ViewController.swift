@@ -19,6 +19,22 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         itemHeaders = ["显示在首页","可添加的卡片"]
+        let item01 = ["name":"01","value":"01"]
+        let item02 = ["name":"02","value":"02"]
+        let item03 = ["name":"03","value":"03"]
+        
+        let item01Data = try! JSONSerialization.data(withJSONObject: item01, options: .prettyPrinted)
+        let item01Str = String(data: item01Data, encoding: .utf8)
+        
+        let item02Data = try! JSONSerialization.data(withJSONObject: item02, options: .prettyPrinted)
+        let item02Str = String(data: item02Data, encoding: .utf8)
+        
+        let item03Data = try! JSONSerialization.data(withJSONObject: item03, options: .prettyPrinted)
+        let item03Str = String(data: item03Data, encoding: .utf8)
+        
+        items = [[item01Str,item02Str],[item03Str]]
+        view.addSubview(collection)
+        collection.dataSourceItems(items, itemHeaders)
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,8 +44,7 @@ class ViewController: UIViewController {
 
     
     lazy var  collection:CustomCollectionView = {
-        let view = CustomCollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
-       // view.register(cellType: BOEHomeTipCell.self)
+        let view = CustomCollectionView(frame: self.view.bounds, collectionViewLayout: flowLayout)
         view.cDelegate = self
         view.cDataSource = self
         view.backgroundColor = .clear
