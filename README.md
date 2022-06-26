@@ -5,6 +5,11 @@
 [![License](https://img.shields.io/cocoapods/l/dragSort.svg?style=flat)](https://cocoapods.org/pods/dragSort)
 [![Platform](https://img.shields.io/cocoapods/p/dragSort.svg?style=flat)](https://cocoapods.org/pods/dragSort)
 
+<video width="320" height="240" controls>
+    <source src="dragSort.mp4" type="video/mp4">
+    您的浏览器不支持 video 标签。
+</video>
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.

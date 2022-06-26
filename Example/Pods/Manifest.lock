@@ -1,5 +1,5 @@
 PODS:
-  - dragSort (0.1.1):
+  - dragSort (0.1.2):
     - Reusable
     - SnapKit
   - FBSnapshotTestCase (2.1.4):
@@ -50,7 +50,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  dragSort: ff03366d088a01a5daea7b439770d4ba4faf5fc4
+  dragSort: 6212b561687170662c430fef267d338de7e97495
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   iOSSnapshotTestCase: a670511f9ee3829c2b9c23e6e68f315fd7b6790f
   Nimble: 5316ef81a170ce87baf72dd961f22f89a602ff84
@@ -59,6 +59,6 @@ SPEC CHECKSUMS:
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: b84e5a7e2067ffdd9f36b2fbed7e5b13af74d057
+PODFILE CHECKSUM: 8de11c7f8cccbf432a49077182edc4820de5b805
 
 COCOAPODS: 1.11.3
