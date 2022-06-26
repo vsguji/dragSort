@@ -57,7 +57,8 @@ open class EditCollectionViewCell: UICollectionViewCell,Reusable {
         isAddAction = isAdd
         image.image = UIImage.init(named: icon)
         label.text = text
-        accessBtn.setImage(UIImage(named: isAdd ? "添加" : "移除"), for: .normal)
+       let image = GetResourcePng.getByResourceBuidleWithName(name: isAdd ? "添加" : "移除")
+        accessBtn.setImage(image, for: .normal)
         accessBtn.addTarget(self, action: #selector(showAccessAction), for: .touchUpInside)
     }
     

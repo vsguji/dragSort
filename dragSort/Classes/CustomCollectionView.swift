@@ -59,7 +59,9 @@ open class CustomCollectionView : UICollectionView {
     }
     
     var itemHeaders = [String]()
-  open var items: [[AnyHashable]]!
+    
+   open var items: [[AnyHashable]]!
+    
     var dragingIndexPath: IndexPath?
     
     public override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -89,7 +91,7 @@ open class CustomCollectionView : UICollectionView {
                  withReuseIdentifier: HeaderCollectionReusableView.reuseIdentifier)
     }
     
-    func dataSourceItems(_ itemBody:[[AnyHashable]]!,_ itemHeaderSections:[String]) {
+  public  func dataSourceItems(_ itemBody:[[AnyHashable]]!,_ itemHeaderSections:[String]) {
         itemHeaders = itemHeaderSections
         items = itemBody
         delegate = self
@@ -382,18 +384,18 @@ extension CustomCollectionView: UICollectionViewDelegate,UICollectionViewDataSou
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: EditCollectionViewCell.self)
         let item = items[indexPath.section][indexPath.item]
-        if (item is String) {
+        if (item is String) { // 字符串 && json
             guard let dic = (item as! String).data(using: .utf8),
-           let json = try? JSONSerialization.jsonObject(with: dic, options: []) as! [String:Any]
+                  let json = try? (JSONSerialization.jsonObject(with: dic, options: []) as! [String:Any])
            else { fatalError("Error") }
             let name = json["name"] as! String
-            cell.dataSource(icon: correct(key: name), text: name,isAdd: indexPath.section == 1)
+            cell.dataSource(icon: name, text: name,isAdd: indexPath.section == 1)
             cell.delegate = self
         }
-        else  {
-            let dit = items[indexPath.section][indexPath.item] as! [String:Any]
-            let name = dit["name"] as! String
-            cell.dataSource(icon:  correct(key: name), text: name,isAdd: indexPath.section == 1)
+        else if (item is [String:Any]) {
+            let dic = items[indexPath.section][indexPath.item] as! [String:Any]
+            let name = dic["name"] as! String
+            cell.dataSource(icon: name, text: name,isAdd: indexPath.section == 1)
             cell.delegate = self
         }
         return cell
@@ -462,19 +464,6 @@ extension CustomCollectionView: UICollectionViewDelegate,UICollectionViewDataSou
         }
     }
     
-    
-    func correct(key:String) ->String {
-        var str = key
-        switch str {
-        case "心率":
-            str =  "心脏"
-        case "血健康指数":
-            str =  "心脏"
-        default:
-            break
-        }
-        return str
-    }
 }
 
 extension CustomCollectionView: UICollectionViewDelegateFlowLayout {

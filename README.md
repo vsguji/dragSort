@@ -39,8 +39,31 @@ https://blog.csdn.net/Riven_wn/article/details/78751528
 
 
 open：可以在任何地方被访问、继承、重写。
+
 public：可以在任何地方被访问，在其他模块中不能被继承和重写。
+
 internal：在整个模块内都可以被访问。
+
 fileprivate：其修饰的属性可以再同一个文件被访问、继承和重写，同一个文件指同一个swift文件，一个文件中可以有多个类。
+
 private：其修饰的属性和方法只能在本类被访问和使用。
 
+
+# 单列
+
+# 双列
+
+# 自定义扩展
+
+# 数据类型
+
+
+
+# 问题  NSItemProviderWriting
+<!--        let item = self.items[indexPath.section][indexPath.row]-->
+<!--        let itemProvider = NSItemProvider(object: item as! NSItemProviderWriting)-->
+<!--        let dragItem = UIDragItem(itemProvider: itemProvider)-->
+<!--        dragItem.localObject = item-->
+
+// NSObject 需完成NSItemProviderWriting协议
+// 本实例 “let item = self.items[indexPath.section][indexPath.row]”,item 为字符串

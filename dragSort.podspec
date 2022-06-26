@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'dragSort'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = '推动排序'
 
 # This description is used to generate tags and improve search results.
@@ -32,9 +32,10 @@ UICollectionView 拖动排序
 
   s.source_files = 'dragSort/Classes/*.swift'
   
-#   s.resource_bundles = {
-#     'dragSort' => ['dragSort/Assets/*.png']
-#   }
+   s.resource_bundles = {
+     'dragSort' => ['dragSort/Resources/*.png']
+   }
+  # s.resources = 'dragSort/Resources/*.png'
   s.swift_version = '5.0'
   # s.public_header_files = 'Pod/Classes/*.swift'
    s.frameworks = 'UIKit','Foundation'

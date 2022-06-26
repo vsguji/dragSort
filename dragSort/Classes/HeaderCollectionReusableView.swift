@@ -70,14 +70,14 @@ open class HeaderCollectionReusableView: UICollectionReusableView,Reusable {
     
     lazy var label:UILabel = {
         let view = UILabel()
-        view.textColor = UIColor(red: 94, green: 94, blue: 94, alpha: 1)
+        view.textColor = UIColor.red
         view.font = UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.regular)
         return view
     }()
     
     lazy var warnLabel:UILabel = {
         let view = UILabel()
-        view.textColor = UIColor(red: 153, green: 153, blue: 153, alpha: 1)
+        view.textColor = UIColor.blue
         view.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
         view.text = "按住拖动可调整顺序"
         return view
