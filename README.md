@@ -10,6 +10,8 @@
     您的浏览器不支持 video 标签。
 </video>
 
+![](dragSort.gif)
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
